@@ -1,0 +1,29 @@
+{
+  "name": "node-practice",
+  "version": "1.0.0",
+  "description": "node practice",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon Basics/app.js",
+    "greet": "echo \"Welcome Aakash\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aakash14goplani/Node-Practice.git"
+  },
+  "keywords": [
+    "node",
+    "practice",
+    "beginner"
+  ],
+  "author": "Aakash Goplani",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/aakash14goplani/Node-Practice/issues"
+  },
+  "homepage": "https://github.com/aakash14goplani/Node-Practice#readme",
+  "dependencies": {
+    "nodemon": "^2.0.2"
+  }
+}

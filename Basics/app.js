@@ -22,5 +22,5 @@ const server = http.createServer((req, res) => {
 // seperating server creation logic from routing
 // simple export - const server = http.createServer(routes);
 const server = http.createServer(routes.handler); // multiple export
-console.log(routes.text);
+console.log(routes.text + ' ...');
 server.listen(4200, 'localhost');

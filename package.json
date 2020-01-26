@@ -5,7 +5,7 @@
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon Basics/app.js",
+    "start": "nodemon 2_ExpressJS_Intro/app.js",
     "greet": "echo \"Welcome Aakash\""
   },
   "repository": {
@@ -24,6 +24,7 @@
   },
   "homepage": "https://github.com/aakash14goplani/Node-Practice#readme",
   "dependencies": {
+    "express": "^4.17.1",
     "nodemon": "^2.0.2"
   }
 }

@@ -9,7 +9,7 @@ const server = http.createServer((req, res) => {
 
     // handle two routes '/' and '/users'
     const url = req.url;
-    const method = url.method;
+    const method = req.method;
     if (url === '/') {
         // return some greeting
         res.write('<html>');
@@ -77,4 +77,4 @@ const server = http.createServer((req, res) => {
     // res.write('</html>');
     // return res.end();
 });
-server.listen(4200, 'localhost');
+server.listen(4100, 'localhost');

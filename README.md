@@ -1,2 +1,2 @@
 # Node-Practice
-Learning Nod JS
+Learning Node JS

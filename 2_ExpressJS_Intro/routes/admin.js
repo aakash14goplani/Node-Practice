@@ -29,7 +29,7 @@ router.get('/add-product', (req, res, next) => {
 router.use(bodyParser.urlencoded({extended: false}));
 
 router.post('/product', (req, res, next) => {
-    console.log('Product Added: ', req.body.productName);
+    console.log('Product Added: ', req.body.title);
     res.redirect('/');
 });
 

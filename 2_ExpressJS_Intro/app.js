@@ -8,6 +8,8 @@ const rootDirectory = require('./util/path');
 
 const app = express();
 
+app.use(express.static(path.join(rootDirectory, 'public')));
+
 app.use('/admin', adminRoutes);
 app.use(shoppingroutes);
 

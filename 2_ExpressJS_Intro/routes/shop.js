@@ -17,7 +17,6 @@ router.get('/', (req, res, next) => {
             </body>
         </html>
     `); */
-    console.log('__dirname: ', __dirname);
     // res.sendFile(path.join(__dirname, '../', 'views', 'shop.html'));
     res.sendFile(path.join(rootDirectory, 'views', 'shop.html'));
 });

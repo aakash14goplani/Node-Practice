@@ -5,6 +5,7 @@ const express = require('express');
 const router = express.Router();
 
 const rootDirectory = require('../util/path');
+const adminData = require('./admin');
 
 router.get('/', (req, res, next) => {
     /* send raw HTML -> replacing this with sending HTML file
@@ -18,7 +19,9 @@ router.get('/', (req, res, next) => {
         </html>
     `); */
     // res.sendFile(path.join(__dirname, '../', 'views', 'shop.html'));
-    res.sendFile(path.join(rootDirectory, 'views', 'shop.html'));
+    console.log('Data from shop.js: ', adminData.product);
+    // res.sendFile(path.join(rootDirectory, 'views', 'shop.html'));
+    res.render('shop', { prod:adminData.product, title: 'My Shop'});
 });
 
 module.exports = router;

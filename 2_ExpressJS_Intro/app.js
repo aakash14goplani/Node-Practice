@@ -2,16 +2,19 @@ const path = require('path');
 
 const express = require('express');
 
-const adminRoutes = require('./routes/admin');
-const shoppingroutes = require('./routes/shop');
-const rootDirectory = require('./util/path');
-
 const app = express();
+
+app.set('view engine', 'pug');
+app.set('views', 'views');
+
+const adminData = require('./routes/admin');
+const shoppingRoutes = require('./routes/shop');
+const rootDirectory = require('./util/path');
 
 app.use(express.static(path.join(rootDirectory, 'public')));
 
-app.use('/admin', adminRoutes);
-app.use(shoppingroutes);
+app.use('/admin', adminData.route);
+app.use(shoppingRoutes);
 
 app.use('/', (req, res, next) => {
     /* send raw HTML -> replacing this with sending HTML file

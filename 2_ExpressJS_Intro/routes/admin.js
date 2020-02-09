@@ -8,6 +8,8 @@ const router = express.Router();
 
 const rootDirectory = require('../util/path');
 
+const products = [];
+
 router.get('/add-product', (req, res, next) => {
     /* send raw HTML -> replacing this with sending HTML file
     res.send(`
@@ -30,7 +32,11 @@ router.use(bodyParser.urlencoded({extended: false}));
 
 router.post('/product', (req, res, next) => {
     console.log('Product Added: ', req.body.title);
+    products.push( { title : req.body.title} );
     res.redirect('/');
 });
 
-module.exports = router;
+// module.exports = router;
+
+exports.route = router;
+exports.product = products;

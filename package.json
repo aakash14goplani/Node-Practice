@@ -25,7 +25,10 @@
   "homepage": "https://github.com/aakash14goplani/Node-Practice#readme",
   "dependencies": {
     "body-parser": "^1.19.0",
+    "ejs": "^3.0.1",
     "express": "^4.17.1",
-    "nodemon": "^2.0.2"
+    "express-handlebars": "^3.1.0",
+    "nodemon": "^2.0.2",
+    "pug": "^2.0.4"
   }
 }

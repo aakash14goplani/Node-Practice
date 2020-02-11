@@ -4,12 +4,16 @@ const express = require('express');
 
 const app = express();
 
-app.set('view engine', 'pug');
-app.set('views', 'views');
-
 const adminData = require('./routes/admin');
 const shoppingRoutes = require('./routes/shop');
 const rootDirectory = require('./util/path');
+
+/* 
+    It's the way you structured your app. If you're starting the server from outside of the folder then you need to provide an absolute path to the views folder.
+    COMPARE YOUR FOLDER STRUCTURE WITH MAX...
+*/
+app.set('views', path.join(rootDirectory, 'views'));
+app.set('view engine', 'pug');
 
 app.use(express.static(path.join(rootDirectory, 'public')));
 

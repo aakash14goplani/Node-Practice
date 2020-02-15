@@ -25,7 +25,18 @@ router.get('/add-product', (req, res, next) => {
     `); */
 
     // res.sendFile(path.join(__dirname, '../', 'views', 'add-product.html'));
-    res.sendFile(path.join(rootDirectory, 'views', 'add-product.html'));
+    // res.sendFile(path.join(rootDirectory, 'views', 'add-product.html'));
+    res.render(
+        'add-product', 
+        { 
+            title: 'Add Product', 
+            path: '/admin/add-product',
+            activeProduct: true,
+            formsCSS: true,
+            productCSS: true
+            /*, layout: false */ 
+        }
+    );
 });
 
 router.use(bodyParser.urlencoded({extended: false}));

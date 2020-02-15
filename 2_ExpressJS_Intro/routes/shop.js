@@ -21,7 +21,19 @@ router.get('/', (req, res, next) => {
     // res.sendFile(path.join(__dirname, '../', 'views', 'shop.html'));
     console.log('Data from shop.js: ', adminData.product);
     // res.sendFile(path.join(rootDirectory, 'views', 'shop.html'));
-    res.render('shop', { prods:adminData.product, title: 'My Shop'});
+    res.render(
+        'shop', 
+        { 
+            prods:adminData.product, 
+            title: 'My Shop', 
+            path: '/', 
+            hasProducts: adminData.product.length > 0,
+            activeShop: true,
+            formsCSS: false,
+            productCSS: true
+            /*, layout: false */
+        }
+    );
 });
 
 module.exports = router;

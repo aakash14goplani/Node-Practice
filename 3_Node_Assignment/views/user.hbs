@@ -1,0 +1,17 @@
+
+<h2>User Details</h2>
+{{#if hasUsers}}
+    <ul class="list-group">
+        {{#each user}}
+            <li class="list-group-item">{{ this.name }}</li>
+        {{/each}}
+    </ul>
+{{#else}}
+    <h2>No Users Found</h2>
+{{/else}}
+{{/if}}
+<form action='/home' method="POST">
+    <div class="form-group">
+        <button type="submit" class="btn btn-primary">Back to Home Page</button>
+    </div>
+</form>

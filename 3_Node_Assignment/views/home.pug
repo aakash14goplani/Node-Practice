@@ -1,0 +1,13 @@
+extends layouts/main-layout
+
+block title
+    title #{title}
+
+block content
+    h2 Home Page
+    form(action="/user", method="post")
+        div.form-group
+            label(for="username") User Name: 
+            input#username(type="text", name="username", class="form-control")
+        div.form-group
+            button(type="submit", class="btn btn-primary") Get User Details

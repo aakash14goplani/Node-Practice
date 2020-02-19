@@ -1,0 +1,21 @@
+<%- include('includes/head') %>
+
+<%- include('includes/upper-body') %>
+
+                    <h2>User Details</h2>
+                    <% if (user.length > 0) { %>
+                    <ul class="list-group">
+                        <% for (let userName of user) { %>
+                            <li class="list-group-item"><%=userName.name %></li>
+                        <% } %>
+                    </ul>
+                    <% } else { %>
+                        <h5>No Users Found...</h5>
+                    <% } %>
+                    <form action='/home' method="POST">
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-primary">Back to Home Page</button>
+                        </div>
+                    </form>
+
+<%- include('includes/lower-body') %>

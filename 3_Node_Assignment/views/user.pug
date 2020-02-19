@@ -1,0 +1,14 @@
+extends layouts/main-layout
+
+block title
+    title #{title}
+
+block content
+    h2 User Details
+    if user.length> 0
+        ul.list-group
+            each userName in user
+                li.list-group-item #{userName.name}
+    form(action="/home", method="post")
+        div.form-group
+            button(type="submit", class="btn btn-primary") Back to Home Page

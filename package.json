@@ -5,7 +5,7 @@
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon 2_ExpressJS_Intro/app.js",
+    "start": "nodemon Actual_Project/app.js",
     "greet": "echo \"Welcome Aakash\""
   },
   "repository": {

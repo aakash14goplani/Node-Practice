@@ -30,6 +30,16 @@ exports.getCart = (req, res, next) => {
     });
 };
 
+exports.getOrders = (req, res, next) => {
+    Product.fetchAll((product) => {
+        res.render('shop/orders', { 
+            prods: product, 
+            title: 'Your Orders', 
+            path: '/orders'
+        });
+    });
+};
+
 exports.getCheckout = (req, res, next) => {
     Product.fetchAll((product) => {
         res.render('shop/checkout', { 

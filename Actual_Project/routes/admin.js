@@ -1,53 +1,13 @@
-const path = require('path');
-
 const express = require('express');
-
 const bodyParser = require('body-parser');
-
 const router = express.Router();
+const productsController = require('../controllers/products');
 
-const rootDirectory = require('../util/path');
-
-const products = [];
-
-router.get('/add-product', (req, res, next) => {
-    /* send raw HTML -> replacing this with sending HTML file
-    res.send(`
-        <html>
-            <head><title>Add Product</title></head>
-            <body>
-                <form method="POST" action="/admin/product">
-                    Product Name: <input type="text" name="productName">
-                    <button type="submit">Submit</button>
-                </form>
-            </body>
-        </html>
-    `); */
-
-    // res.sendFile(path.join(__dirname, '../', 'views', 'add-product.html'));
-    // res.sendFile(path.join(rootDirectory, 'views', 'add-product.html'));
-    res.render(
-        'add-product', 
-        { 
-            title: 'Add Product', 
-            path: '/admin/add-product',
-            activeProduct: true,
-            formsCSS: true,
-            productCSS: true
-            /*, layout: false */ 
-        }
-    );
-});
+router.get('/add-product', productsController.getAddProducts);
 
 router.use(bodyParser.urlencoded({extended: false}));
 
-router.post('/product', (req, res, next) => {
-    console.log('Product Added: ', req.body.title);
-    products.push( { title : req.body.title} );
-    res.redirect('/');
-});
+router.post('/add-product', productsController.postAddProducts);
 
-// module.exports = router;
+module.exports = router;
 
-exports.route = router;
-exports.product = products;

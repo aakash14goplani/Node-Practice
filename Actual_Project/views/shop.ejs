@@ -7,7 +7,7 @@
         <h1>My Products</h1>
         <p>List of all the products...</p>
 
-        <% if (prods.length > 0) { %>
+        <% if (prods && prods.length > 0) { %>
             <div class="grid">
                 <% for (let product of prods) { %>
                     <article class="card product-item">

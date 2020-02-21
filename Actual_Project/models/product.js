@@ -38,6 +38,7 @@ module.exports = class Product {
         }); */
 
         getProductsFromFile(products => {
+            this.id = (Math.floor(Math.random() * 100)).toString();
             products.push(this);
             fileSystem.writeFile(filePath, JSON.stringify(products), (error) => {
                 if (error) {

@@ -1,6 +1,1 @@
-[
-    {"title":"Angular","imageUrl":"/images/book.jpg","description":"search all questions","price":"100"},
-    {"title":"Aakash","imageUrl":"/images/book.jpg","description":"search all questions","price":"100"},
-    {"title":"Senior Developer","imageUrl":"/images/book.jpg","description":"search all questions","price":"100"},
-    {"title":"Full Stack Developer","imageUrl":"/images/book.jpg","description":"search all questions","price":"100"}
-]
+[{"title":"Node JS","imageUrl":"/images/book.jpg","description":"Node JS Practice from Udemy by Max","price":"1000","id":"57"},{"title":"Angular","imageUrl":"/images/book.jpg","description":"Angular Course","price":"100","id":"7"}]

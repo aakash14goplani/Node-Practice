@@ -6,7 +6,8 @@ const bodyParser = require('body-parser');
 const adminRoutes = require('./routes/admin');
 const shoppingRoutes = require('./routes/shop');
 const rootDirectory = require('./util/path');
-const mongoConnect = require('./util/database');
+const mongoConnect = require('./util/nosql_database');
+const sequelize = require('./util/sql_database');
 
 const errorController = require('./controllers/error');
 
@@ -21,7 +22,17 @@ app.use(shoppingRoutes);
 
 app.use('/', errorController.get404);
 
-mongoConnect(client => {
+sequelize.sync()
+.then((result) => {
+    // console.log('TABLE CREATED', result);
+})
+.catch(error  => {
+    // console.log('Error in creating sequelize table in app.js', error);
+});
+
+app.listen(4200, 'localhost');
+
+/* mongoConnect(client => {
     console.log('client status: ', client);
     app.listen(4200, 'localhost');
-});
+}); */

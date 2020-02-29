@@ -8,11 +8,11 @@ const mongoConnect = (callback) => {
         useNewUrlParser: true,
     })
     .then(client => {
-        // console.log('connected to mongodb: ', client);
+        console.log('connected to mongodb: ', client);
         callback(client);
     })
     .catch(error => {
-        // console.log('error connecting to mongodb: ', error);
+        console.log('error connecting to mongodb: ', error);
         callback(error);
     });
 }

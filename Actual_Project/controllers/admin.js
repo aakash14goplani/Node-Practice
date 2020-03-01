@@ -27,8 +27,10 @@ exports.getEditProduct = (req, res, next) => {
         });
     }); */
     /* sequelize approach */
-    Product.findByPk(productId)
-    .then(product => {
+    req.user.getProduct_sequelizes({where: {id: productId}})
+    // Product.findByPk(productId)
+    .then(products => {
+        const product = products[0];
         res.render('admin/edit-product', { 
             title: 'Edit Product', 
             path: '/admin/edit-product',
@@ -88,7 +90,18 @@ exports.postAddProducts = (req, res, next) => {
     }); */
 
     /* sequelize approach */
-    Product.create({
+    /* available methods
+    getProduct_sequelizes
+    countProduct_sequelizes
+    hasProduct_sequelize
+    hasProduct_sequelizes
+    setProduct_sequelizes
+    addProduct_sequelize
+    addProduct_sequelizes
+    removeProduct_sequelize
+    removeProduct_sequelizes
+    createProduct_sequelize */
+    req.user.createProduct_sequelize({
         title,
         price,
         description,
@@ -113,10 +126,11 @@ exports.getProducts = (req, res, next) => {
     }); */
 
     /* sequelize approach */
-    Product.findAll()
-    .then((product) => {
+    req.user.getProduct_sequelizes()
+    // Product.findAll()
+    .then(products => {
         res.render('admin/products', { 
-            prods: product, 
+            prods: products, 
             title: 'Admin Products', 
             path: '/admin/products'
         });

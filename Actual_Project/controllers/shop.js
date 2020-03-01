@@ -128,6 +128,7 @@ exports.getIndex = (req, res, next) => {
 };
 
 exports.getCart = (req, res, next) => {
+    /* filesystem approach
     Cart.getCart(cart => {
         Product.fetchAll(products => {
             const cartProducts = [];
@@ -143,6 +144,21 @@ exports.getCart = (req, res, next) => {
                 products: cartProducts
             });
         });
+    }); */
+    /* sequelize approach */
+    req.user.getCart()
+    .then(cart => {
+        return cart.getProduct_sequelizes();
+    })
+    .then(products => {
+        res.render('shop/cart', {
+            path: '/cart',
+            title: 'Your Cart',
+            products: products
+        });
+    })
+    .catch(error => {
+        console.log('Error fetching details from cart in shop controller: ', error);
     });
 };
 

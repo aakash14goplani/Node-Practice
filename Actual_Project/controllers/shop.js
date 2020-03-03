@@ -164,34 +164,128 @@ exports.getCart = (req, res, next) => {
 
 exports.postCart = (req, res, next) => {
     const productId = req.body.productId;
-    Product.findProductById(productId, (product) => {
-        Cart.addProduct(productId, product.price);
-        /* res.render('shop/cart', { 
-            prods: product, 
-            title: 'Cart', 
-            path: '/cart'
-        }); */
+    let fetchedCart;
+    let newQuantity = 1;
+
+    for(let i in req.user) {
+        console.log(i);
+    }
+    
+    /* sequelize approach */
+    req.user.getCart()
+    .then(cart => {
+        console.log('cart: ', cart);
+        fetchedCart = cart;
+        return cart.getProduct_sequelizes({ where: { id: productId }});
+    })
+    .then(products => {
+        let product = (products.length > 0) ? products[0] : null;
+        if (product) {
+            const oldQuantity = product.cartItem.quantity;
+            newQuantity = oldQuantity + 1;            
+        }
+        return Product.findByPk(productId);
+    })
+    .then(product => {
+        return fetchedCart.addProduct_sequelizes(product, {
+            through: { quantity: newQuantity }
+        });
+    })
+    .then(() => {
+        res.redirect('/cart');
+    })
+    .catch(error => {
+        console.log('Error adding products to cart in shop controller: ', error);
     });
-    res.redirect('/');
+
+    /* filesystem approach */
+    // Product.findProductById(productId, (product) => {
+    //     Cart.addProduct(productId, product.price);
+    //     /* res.render('shop/cart', { 
+    //         prods: product, 
+    //         title: 'Cart', 
+    //         path: '/cart'
+    //     }); */
+    // });
 };
 
 exports.postCartDeleteProduct = (req, res, next) => {
     const prodId = req.body.productId;
+    /* sequelize approach */
+    req.user.getCart()
+    .then(cart => {
+        return cart.getProduct_sequelizes({ where: { id: prodId } });
+    })
+    .then(products => {
+        const product = products[0];
+        return product.cartItem.destroy();
+    })
+    .then(result => {
+        res.redirect('/cart');
+    })
+    .catch(error => {
+        console.log('Error deleting products from cart in shop controller: ', error);
+    });
+    /* file system approach
     Product.findProductById(prodId, product => {
         Cart.deleteProduct(prodId, product.price);
         res.redirect('/cart');
-    });
+    }); */
 };
 
 exports.getOrders = (req, res, next) => {
+    /* file system approach
     Product.fetchAll((product) => {
         res.render('shop/orders', { 
             prods: product, 
             title: 'Your Orders', 
             path: '/orders'
         });
-    });
+    }); */
+
+    /* sequelize approach */
+    req.user
+    .getOrders({include: ['product_sequelizes']})
+    .then(orders => {
+        res.render('shop/orders', {
+            path: '/orders',
+            title: 'Your Orders',
+            orders: orders
+        });
+    })
+    .catch(err => console.log(err));
 };
+
+exports.postOrders = (req, res, next) => {
+    let fetchedCart;
+    req.user.getCart()
+    .then(cart => {
+        fetchedCart = cart;
+        return cart.getProduct_sequelizes();
+    })
+    .then(products => {
+        return req.user
+        .createOrder()
+        .then(order => {
+            return order.addProduct_sequelizes(
+                products.map(product => {
+                    product.orderItem = { quantity: product.cartItem.quantity };
+                    return product;
+                })
+            );
+        })
+        .catch(error => console.log(error));
+    })
+    .then(result => {
+        return fetchedCart.setProduct_sequelizes(null);
+    })
+    .then(result => {
+        res.redirect('/orders');
+    })
+    .catch(error => {
+        console.log('Error adding details to order in shop controller: ', error);
+    });
+}
 
 exports.getCheckout = (req, res, next) => {
     Product.fetchAll((product) => {

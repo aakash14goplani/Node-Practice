@@ -14,6 +14,8 @@ const User = require('./models/user');
 const errorController = require('./controllers/error');
 const Cart = require('./models/cart_sequelize');
 const CartItem = require('./models/cart-item');
+const Order = require('./models/order');
+const OrderItem = require('./models/order-item');
 
 app.set('views', path.join(rootDirectory, 'views'));
 app.set('view engine', 'ejs');
@@ -42,6 +44,9 @@ User.hasOne(Cart);
 Cart.belongsTo(User);
 Cart.belongsToMany(Product, { through: CartItem });
 Product.belongsToMany(Cart, { through: CartItem });
+Order.belongsTo(User);
+User.hasMany(Order);
+Order.belongsToMany(Product, { through: OrderItem });
 
 // sequelize.sync({force: true})
 sequelize.sync()
@@ -56,13 +61,22 @@ sequelize.sync()
     return Promise.resolve(user);
 })
 .then(user => {
-    return user.createCart();
+    user.getCart()
+    .then(cart => {
+        if (cart) {
+            return;
+        }
+        return user.createCart();
+    })
+    .catch(error => {
+        console.log('Error in creating sequelize table in app.js', error);
+    });;
 })
-.then(cart => {
+.then(() => {
     app.listen(4200, 'localhost');
 })
 .catch(error => {
-    // console.log('Error in creating sequelize table in app.js', error);
+    console.log('Error in creating sequelize table in app.js', error);
 });
 
 // app.listen(4200, 'localhost');

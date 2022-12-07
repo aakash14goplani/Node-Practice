@@ -24,9 +24,9 @@
   },
   "homepage": "https://github.com/aakash14goplani/Node-Practice#readme",
   "dependencies": {
-    "body-parser": "^1.19.0",
+    "body-parser": "^1.20.1",
     "ejs": "^3.0.1",
-    "express": "^4.17.1",
+    "express": "^4.18.2",
     "express-handlebars": "^3.1.0",
     "mongodb": "^3.5.3",
     "mysql2": "^2.1.0",
